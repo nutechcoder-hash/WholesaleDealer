@@ -1,0 +1,3 @@
+<resources>
+    <style name="Theme.WholesaleDealer" parent="android:Theme.Material.NoActionBar" />
+</resources>
