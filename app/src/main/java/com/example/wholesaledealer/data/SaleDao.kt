@@ -5,8 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SaleDao {
+    // This is now a suspend function (one-time async read)
     @Query("SELECT * FROM sales ORDER BY date DESC")
-    fun getAllSales(): Flow<List<Sale>>
+    suspend fun getAllSales(): List<Sale>
 
     @Insert
     suspend fun insertSale(sale: Sale): Long
