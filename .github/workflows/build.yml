@@ -10,15 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '17'
+
+    # This step generates the gradlew script if it is missing
+    - name: Generate Gradle Wrapper
+      run: gradle wrapper --gradle-version 8.11.1
+
+    # This step grants execute permission to the newly generated gradlew
+    - name: Grant execute permission
+      run: chmod +x gradlew
+
     - name: Build APK
-      run: |
-        chmod +x gradlew
-        ./gradlew assembleDebug
+      run: ./gradlew assembleDebug
+
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
